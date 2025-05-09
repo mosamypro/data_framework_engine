@@ -6,7 +6,7 @@ different database systems and extract data and metadata.
 """
 
 # Import the BaseExtractor class
-from extractors.abstractextractor import BaseExtractor
+
 
 # Import the MySQLExtractor class
 from extractors.mysql.mysql_extractor import MySQLExtractor

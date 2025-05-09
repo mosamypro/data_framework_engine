@@ -8,6 +8,6 @@ abstractextractor module.
 
 # Import subpackages to make them available when importing the extractors package
 from . import abstractextractor
-from . import mysql
+from . import sqlserver
 
-__all__ = ['abstractextractor', 'mysql']
+__all__ = ["abstractextractor", "sqlserver"]
