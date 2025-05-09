@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  postgres-extractor:
+    build:
+      context: ./extractors/postgres
+    environment:
+      - DB_HOST=postgres-db-host
+      - DB_USER=postgres-user
+      - DB_PASSWORD=postgres-password
+      - DB_NAME=postgres-db
+
+  sqlserver-extractor:
+    build:
+      context: ./extractors/sqlserver
+    environment:
+      - DB_HOST=sqlserver-db-host
+      - DB_USER=sqlserver-user
+      - DB_PASSWORD=sqlserver-password
+      - DB_NAME=sqlserver-db
+
+  mysql-extractor:
+    build:
+      context: ./extractors/mysql
+    environment:
+      - DB_HOST=mysql-db-host
+      - DB_USER=mysql-user
+      - DB_PASSWORD=mysql-password
+      - DB_NAME=mysql-db
+
+  oracle-extractor:
+    build:
+      context: ./extractors/oracle
+    environment:
+      - DB_HOST=oracle-db-host
+      - DB_USER=oracle-user
+      - DB_PASSWORD=oracle-password
+      - DB_NAME=oracle-db
+
+  metadata-repository:
+    build:
+      context: ./metadata-repository
+    ports:
+      - "5000:5000"
+
+  controller:
+    build:
+      context: ./controller
+    depends_on:
+      - metadata-repository
+
+  cdc-stream-processor:
+    build:
+      context: ./cdc-stream-processor
+    depends_on:
+      - metadata-repository
